@@ -1,0 +1,213 @@
+@import './base.css';
+
+#app {
+  margin: 0 auto;
+  font-weight: normal;
+}
+
+a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+  padding: 3px;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
+
+.w-full {
+  width: 100%;
+}
+
+.max-w-full-800 {
+  width: 100%;
+  max-width: 800px;
+}
+
+@media (max-width: 816px) {
+  .p-16-tablet {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+.flex-1 {
+  flex: 1
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.auto-layout {
+  display: flex;
+}
+
+.auto-layout.mobile-only {
+  display: none;
+}
+
+@media (max-width: 650px) {
+  .auto-layout.mobile-only {
+    display: flex;
+  }
+}
+
+
+.auto-layout.horizontal {
+  flex-direction: row;
+}
+
+.auto-layout.vertical {
+  flex-direction: column;
+}
+
+/* Top aligns - For vertical alignments in row (horizontal) layout */
+.auto-layout.horizontal.top-left {
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.auto-layout.horizontal.top-center {
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.auto-layout.horizontal.top-right {
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+/* Center aligns */
+.auto-layout.horizontal.left {
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.auto-layout.horizontal.center {
+  justify-content: center;
+  align-items: center;
+}
+
+.auto-layout.horizontal.right {
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* Bottom aligns */
+.auto-layout.horizontal.bottom-left {
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.auto-layout.horizontal.bottom-center {
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.auto-layout.horizontal.bottom-right {
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+/* For vertical layout, swap roles of justify-content and align-items */
+
+.auto-layout.vertical.top-left {
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.auto-layout.vertical.top-center {
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.auto-layout.vertical.top-right {
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.auto-layout.vertical.left {
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.auto-layout.vertical.center {
+  align-items: center;
+  justify-content: center;
+}
+
+.auto-layout.vertical.right {
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.auto-layout.vertical.bottom-left {
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.auto-layout.vertical.bottom-center {
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.auto-layout.vertical.bottom-right {
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+
+.gap-0 {
+  gap: 0px
+}
+
+.gap-4 {
+  gap: 4px;
+}
+
+.gap-8 {
+  gap: 8px;
+}
+
+.gap-12 {
+  gap: 12px;
+}
+
+.gap-16 {
+  gap: 16px;
+}
+
+.gap-20 {
+  gap: 20px;
+}
+
+.gap-24 {
+  gap: 24px;
+}
+
+.gap-28 {
+  gap: 28px;
+}
+
+.gap-32 {
+  gap: 32px;
+}
+
+@media (max-width: 650px) {
+  .hide-mobile {
+    display: none;
+  }
+
+  .gap-16-mobile {
+    gap: 16px;
+  }
+
+  .gap-8-mobile {
+    gap: 8px;
+  }
+}
