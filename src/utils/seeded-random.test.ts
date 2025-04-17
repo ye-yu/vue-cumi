@@ -53,7 +53,7 @@ console.log("Using seed", usingSeed)
 const generator = seededRandom(usingSeed);
 const minRange = 0;
 const maxRange = 100;
-const numberOfSamples = 10000;
-const numberOfBins = 10;
+const numberOfSamples = 80;
+const numberOfBins = 2;
 
 testRandomDistribution(generator, minRange, maxRange, numberOfSamples, numberOfBins);

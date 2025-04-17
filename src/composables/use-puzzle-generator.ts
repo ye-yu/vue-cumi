@@ -13,19 +13,20 @@ function getClientLocale() {
   }
 }
 
-const generateColorPuzzle = () => {
-  const date = new Date()
+export const generateColorPuzzle = (date: Date) => {
   const seed = [
     getClientLocale(),
-    date.getDay(),
+    date.getDate(),
     date.getMonth(),
     date.getFullYear(),
   ].join('')
 
-  const random = seededRandom(seed)
+  const seedToRandom = seededRandom(seed)
+  seedToRandom.random()
+  const random = seededRandom(seedToRandom.random() * Number.MAX_SAFE_INTEGER)
 
   const minMix = 4
-  const maxMix = 8
+  const maxMix = 12
   const mixCount = random.nextInt(minMix, maxMix)
 
 
@@ -33,17 +34,35 @@ const generateColorPuzzle = () => {
   const palette = random.nextItem(palettes);
 
 
-  const mixes = Array.from({ length: mixCount }).map(() => random.nextItem(palette.palettes).value)
+  const paletteMixes = Array.from({ length: mixCount }).map(() => random.nextItem(palette.palettes))
+  const mixes = paletteMixes.map(e => e.value)
+  const paletteCount = paletteMixes.reduce((a, b) => {
+    a[b.name] ??= 0
+    a[b.name] += 1
+    return a
+  }, {} as Record<string, number>)
 
-  return mixColors(mixes)
+  return {
+    palette,
+    paletteCount,
+    mixes,
+  }
 }
 
 
-const todaysPuzzle = computed(generateColorPuzzle);
+const todaysPuzzle = computed(() => generateColorPuzzle(new Date()));
+const yesterdaysPuzzle = computed(() => {
+  const date = new Date();
+  date.setDate(date.getDate() - 1)
+  return generateColorPuzzle(date)
+});
 export function usePuzzleGenerator() {
   return {
     get puzzle() {
-      return todaysPuzzle.value
+      return mixColors(todaysPuzzle.value.mixes)
+    },
+    get yesterdaysPuzzle() {
+      return yesterdaysPuzzle.value
     }
   }
 }

@@ -7,12 +7,12 @@ export class SeededRandom {
 
   // A simple pseudo-random number generation algorithm (Linear Congruential Generator - LCG)
   private nextSeed(): number {
-    this.seed = (this.seed * 1103515245 + 12345) % 2147483648;
+    this.seed = (this.seed * 1664525 + 1013904223) % Number.MAX_SAFE_INTEGER;
     return this.seed;
   }
 
   random(): number {
-    return this.nextSeed() / 2147483647;
+    return this.nextSeed() / Number.MAX_SAFE_INTEGER;
   }
 
   nextInt(min: number, max: number): number {
@@ -24,7 +24,8 @@ export class SeededRandom {
   }
 
   nextItem<T>(array: T[]): T {
-    return array[this.nextInt(0, array.length)]
+    const index = this.nextInt(0, array.length)
+    return array[index]
   }
 }
 
@@ -36,5 +37,7 @@ export function seededRandom(seed: number | string) {
     }
     seed = s;
   }
-  return new SeededRandom(seed)
+
+  const seedForRandom = new SeededRandom(seed)
+  return new SeededRandom(seedForRandom.nextInt(0, Number.MAX_SAFE_INTEGER))
 }

@@ -2,6 +2,7 @@ import { type RGB } from "@/utils/color-space.util"
 import { tagString, useLocalStorage } from "./use-local-storage"
 import { computed, ref } from "vue"
 import { mixColors } from "@/utils/color-mixer.util"
+import { useMixHistory } from "./use-mix-history"
 
 export class PaletteGroup {
   constructor(
@@ -66,7 +67,6 @@ const cymkwPalette = new PaletteGroup(
 
 
 const activePaletteKey = tagString<PaletteGroup>('activePaletteKey');
-const activeMixKey = tagString<Record<string, number>>('activeMixKey');
 const activePalette = ref(standardRGBBW)
 const activeMix = ref({} as Record<string, number>)
 
@@ -90,10 +90,11 @@ const mixResult = computed(() => mixes.value.length ? mixColors(mixes.value) : n
 export function useActivePalette() {
   const storage = useLocalStorage()
 
+  const mixHistory = useMixHistory()
   return {
     init() {
       activePalette.value = storage.get(activePaletteKey) ?? standardRGBBW;
-      activeMix.value = storage.get(activeMixKey) ?? {};
+      activeMix.value = mixHistory.todaysMix?.mixes ?? {}
     },
     get activePalette(): PaletteGroup {
       return activePalette.value
@@ -120,18 +121,18 @@ export function useActivePalette() {
     },
     resetMix() {
       activeMix.value = {}
-      storage.set(activeMixKey, activeMix.value)
+      mixHistory.saveTodaysMix(activeMix.value, this.activePalette.name);
     },
     addMix(palette: PaletteItem) {
       activeMix.value[palette.name] ??= 0
       activeMix.value[palette.name] += 1
-      storage.set(activeMixKey, activeMix.value)
+      mixHistory.saveTodaysMix(activeMix.value, this.activePalette.name);
     },
     reduceMix(palette: PaletteItem) {
       activeMix.value[palette.name] ??= 0
       activeMix.value[palette.name] -= 1
       activeMix.value[palette.name] = Math.max(0, activeMix.value[palette.name])
-      storage.set(activeMixKey, activeMix.value)
+      mixHistory.saveTodaysMix(activeMix.value, this.activePalette.name);
     },
     getMixCount(palette: PaletteItem) {
       return activeMix.value[palette.name] ?? 0

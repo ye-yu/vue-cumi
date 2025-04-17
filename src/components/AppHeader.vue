@@ -7,7 +7,7 @@
       CUMI
     </div>
     <div class="caption">
-      can you match it?
+      can you mix it?
     </div>
   </div>
 </template>
