@@ -1,4 +1,4 @@
-const releasedAt = new Date(2025, 3, 18)
+const releasedAt = new Date(2025, 3, 17)
 
 export function getDaysAfterRelease() {
   const now = new Date()
