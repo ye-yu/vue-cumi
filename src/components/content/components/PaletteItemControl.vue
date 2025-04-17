@@ -13,18 +13,18 @@ const activePalette = useActivePalette()
 
 
 <template>
-  <div class="palette-item auto-layout vertical top-left">
+  <div class="palette-item auto-layout vertical left">
     <div class="flex-1 w-full hide-mobile"
       :style="{ backgroundColor: rgbToHex(palette.renderValue), borderTopLeftRadius: '12px', borderTopRightRadius: '12px' }">
     </div>
     <div class="auto-layout horizontal justify-between w-full gap-8">
-      <div class="palette-control" @click="activePalette.reduceMix(palette)">-</div>
+      <div class="palette-control auto-layout horizontal center" @click="activePalette.reduceMix(palette)">-</div>
       <div class="auto-layout mobile-only horizontal center gap-8 show-mobile">
-        <div :style="{ width: '16px', height: '16px', backgroundColor: rgbToHex(palette.renderValue) }"></div>
+        <div :style="{ width: '24px', height: '24px', backgroundColor: rgbToHex(palette.renderValue) }"></div>
         <div :style="{ width: '80px' }">{{ palette.name }}</div>
       </div>
-      <div style="width: 24px; text-align: center;">{{ activePalette.getMixCount(palette) }}</div>
-      <div class="palette-control" @click="activePalette.addMix(palette)">+</div>
+      <div class=" auto-layout horizontal center" style="width: 24px; text-align: center;">{{ activePalette.getMixCount(palette) }}</div>
+      <div class="palette-control auto-layout horizontal center" @click="activePalette.addMix(palette)">+</div>
     </div>
   </div>
 </template>
@@ -36,6 +36,7 @@ const activePalette = useActivePalette()
   height: 80px;
   box-shadow: 0 4px 8px -4px rgba(0, 0, 0, 0.25);
   background: #fff;
+  touch-action: manipulation;
 }
 
 .palette-control {
@@ -49,7 +50,12 @@ const activePalette = useActivePalette()
 @media (max-width: 650px) {
   .palette-item {
     width: unset;
-    height: unset;
+    height: 40px;
+  }
+
+  .palette-control {
+    width: 32px;
+    height: 32px;
   }
 }
 </style>
