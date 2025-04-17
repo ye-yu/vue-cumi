@@ -16,7 +16,7 @@ export function shareResult(shareData: {
   toShare.title = `CUMI | Today's challege ${rgbToHex(shareData.todaysChallenge)}`
   toShare.text = `CUMI #${puzzleDays} - My mixes are ${shareData.similarity}% match today!\n\nMy mixes: ${shareData.mixes.length} count\n\n`
   toShare.url = `${window.location.href}`
-  if (navigator.canShare(toShare)) {
+  if (navigator?.canShare(toShare)) {
     navigator.share(toShare)
     return ShareType.sharer
   } else {
@@ -26,6 +26,7 @@ export function shareResult(shareData: {
       '',
       toShare.url
     ].join('\n'))
+    alert('Copied to clipboard!')
     return ShareType.clipboard
   }
 }
