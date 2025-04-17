@@ -14,7 +14,7 @@ export function shareResult(shareData: {
   const puzzleDays = getDaysAfterRelease();
   const toShare: ShareData = {}
   toShare.title = `CUMI | Today's challege ${rgbToHex(shareData.todaysChallenge)}`
-  toShare.text = `CUMI #${puzzleDays} - My mixes are ${shareData.similarity}% match today!\n\nMy mixes: \n${shareData.mixes.join('\n')}\n\n`
+  toShare.text = `CUMI #${puzzleDays} - My mixes are ${shareData.similarity}% match today!\n\nMy mixes: ${shareData.mixes.length} count\n\n`
   toShare.url = `${window.location.href}`
   if (navigator.canShare(toShare)) {
     navigator.share(toShare)
