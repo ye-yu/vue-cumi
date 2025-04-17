@@ -6,40 +6,36 @@ export interface MixHistory {
   mixes: Record<string, number>
 }
 
+function generateKeyFromDate(date: Date) {
+  const key = [
+    'mix-history',
+    date.getDate(),
+    date.getMonth(),
+    date.getFullYear(),
+  ].join(':')
+  return tagString<MixHistory>(key)
+}
+
+const todaysKey = generateKeyFromDate(new Date)
+const date = new Date
+date.setDate(date.getDate() - 1)
+
+const yesterdaysKey = generateKeyFromDate(date)
+
 export function useMixHistory() {
   const localStorage = useLocalStorage()
   return {
-    get todaysKey() {
-      const date = new Date()
-      const key = [
-        'mix-history',
-        date.getDate(),
-        date.getMonth(),
-        date.getFullYear(),
-      ].join(':')
-      return tagString<MixHistory>(key)
-    },
-    get yesterdaysKey() {
-      const date = new Date()
-      const key = [
-        'mix-history',
-        date.getDate() - 1,
-        date.getMonth(),
-        date.getFullYear(),
-      ].join(':')
-      return tagString<MixHistory>(key)
-    },
     saveTodaysMix(mixes: Mixes, name: string) {
-      localStorage.set(this.todaysKey, {
+      localStorage.set(todaysKey, {
         name: name,
         mixes,
       })
     },
     get todaysMix() {
-      return localStorage.get(this.todaysKey)
+      return localStorage.get(todaysKey)
     },
     get yesterdaysMix() {
-      return localStorage.get(this.yesterdaysKey)
+      return localStorage.get(yesterdaysKey)
     },
   }
 }
