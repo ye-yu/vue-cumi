@@ -1,4 +1,4 @@
-import type { RGB } from "./color-space.util";
+import { rgbToHex, type RGB } from "./color-space.util";
 import { getDaysAfterRelease } from "./date.util";
 
 export enum ShareType {
@@ -13,8 +13,8 @@ export function shareResult(shareData: {
 }): ShareType {
   const puzzleDays = getDaysAfterRelease();
   const toShare: ShareData = {}
-  toShare.title = `CUMI #${puzzleDays} - My mixes are ${shareData.similarity}% match today!`
-  toShare.text = `My mixes: ${shareData.mixes.join(', ')}`
+  toShare.title = `CUMI | Today's challege ${rgbToHex(shareData.todaysChallenge)}`
+  toShare.text = `CUMI #${puzzleDays} - My mixes are ${shareData.similarity}% match today!\n\nMy mixes: \n${shareData.mixes.join('\n')}\n\n`
   toShare.url = `${window.location.href}`
   if (navigator.canShare(toShare)) {
     navigator.share(toShare)
