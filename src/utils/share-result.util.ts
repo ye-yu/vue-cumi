@@ -8,15 +8,15 @@ export enum ShareType {
 
 export function shareResult(shareData: {
   todaysChallenge: RGB,
-  mixes: string[],
+  mixCount: number,
   similarity: string,
 }): ShareType {
   const puzzleDays = getDaysAfterRelease();
   const toShare: ShareData = {}
   toShare.title = `CUMI | Today's challege ${rgbToHex(shareData.todaysChallenge)}`
-  toShare.text = `CUMI #${puzzleDays} - My mixes are ${shareData.similarity}% match today!\n\nMy mixes: ${shareData.mixes.length} count\n\n`
+  toShare.text = `CUMI #${puzzleDays} - My mixes are ${shareData.similarity}% match today!\n\nMy mixes: ${shareData.mixCount} count\n\n`
   toShare.url = `${window.location.href}`
-  if (navigator?.canShare(toShare)) {
+  if (navigator?.canShare?.(toShare)) {
     navigator.share(toShare)
     return ShareType.sharer
   } else {

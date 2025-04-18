@@ -35,11 +35,10 @@ const yesterdaysMix = computed(() => mixColors(yesterdaysPuzzle.value.mixes))
 function share() {
   const todaysChallenge = puzzleGenerator.puzzle;
   const mixResult = activePalette.mixResult;
-  const mixDescription = activePalette.mixDescription
   const similarity = mixResult ? compareSimilarity(todaysChallenge, mixResult).toFixed(2) : '0'
   shareResult({
     todaysChallenge: todaysChallenge,
-    mixes: mixDescription,
+    mixCount: activePalette.mixes.length,
     similarity: similarity
   })
 }
