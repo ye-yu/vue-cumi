@@ -1,0 +1,44 @@
+dialog {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 0;
+  border-radius: 16px;
+  min-width: 300px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    top: 49%;
+  }
+
+  to {
+    opacity: 1;
+    top: 50%;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 200ms ease-in-out forwards;
+}
+
+.dialog-title,
+.dialog-subtitle {
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 24px;
+  text-align: left;
+  color: #494949;
+}
+
+.dialog-subtitle {
+  font-size: 16px
+}
+
+.dialog-typo {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  color: #808080;
+}
