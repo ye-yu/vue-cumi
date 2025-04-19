@@ -63,28 +63,28 @@ const dialog = ref<HTMLDialogElement>()
         Ready to play?</div>
     </div>
     <ContentBoard />
-    <div class="auto-layout horizontal left gap-24">
+    <div class="auto-layout horizontal center gap-24">
       <AppButton label="Share result" icon="ios_share" @click="share" />
       <AppButton label="Yesterday's result" icon="crown" @click="showYesterdaysResult" />
     </div>
   </div>
   <dialog ref="dialog" class="fade-in">
     <div class="auto-layout vertical top-center gap-32" style="padding: 8px 12px">
-      <div class="how-good">
-        Yesterday's result #{{ getDaysAfterRelease() - 1 }}
+      <div class="dialog-title">
+        Result #{{ getDaysAfterRelease() - 1 }}
       </div>
       <MixSummary :color="yesterdaysMix" :descriptions="[rgbToHex(yesterdaysMix)]" :name="yesterdaysPuzzle.palette.name"
         :mixes="yesterdaysPuzzle.paletteCount" />
-      <div class="w-full auto-layout vertical left gap-12" v-if="yesterdaysUserMix">
-        <div class="how-good w-full" style="font-size: 16px">
+      <div class="w-full auto-layout vertical left gap-12" v-if="yesterdaysUserMix && yesterdaysUserMixResult">
+        <div class="dialog-subtitle w-full">
           Your mix
         </div>
-        <MixSummary :color="yesterdaysUserMixResult!" :descriptions="[rgbToHex(yesterdaysUserMixResult!)]"
+        <MixSummary :color="yesterdaysUserMixResult" :descriptions="[rgbToHex(yesterdaysUserMixResult)]"
           :name="yesterdaysUserMix.name" :mixes="yesterdaysUserMix.mixes" />
         <div class="todays-challenge-caption">
           Similarity:
           <span style="font-weight: 700;">
-            {{ compareSimilarity(yesterdaysUserMixResult!, yesterdaysMix).toFixed(2) }}%
+            {{ compareSimilarity(yesterdaysUserMixResult, yesterdaysMix).toFixed(2) }}%
           </span>
         </div>
       </div>
@@ -126,30 +126,5 @@ const dialog = ref<HTMLDialogElement>()
   font-weight: 400;
   font-size: 14px;
   color: #808080;
-}
-
-dialog {
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border: 0;
-  border-radius: 16px;
-  min-width: 300px;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    top: 49%;
-  }
-
-  to {
-    opacity: 1;
-    top: 50%;
-  }
-}
-
-.fade-in {
-  animation: fadeIn 200ms ease-in-out forwards;
 }
 </style>
