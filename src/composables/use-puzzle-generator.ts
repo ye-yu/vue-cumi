@@ -3,19 +3,9 @@ import { useActivePalette } from "./use-active-palette";
 import { mixColors } from "@/utils/color-mixer.util";
 import { computed } from "vue";
 
-function getClientLocale() {
-  if (typeof Intl !== 'undefined') {
-    try {
-      return Intl.NumberFormat().resolvedOptions().locale;
-    } catch (err: unknown) {
-      console.error("Cannot get locale from Intl", err)
-    }
-  }
-}
-
 export const generateColorPuzzle = (date: Date) => {
   const seed = [
-    getClientLocale(),
+    'en-GB',
     date.getDate(),
     date.getMonth(),
     date.getFullYear(),
