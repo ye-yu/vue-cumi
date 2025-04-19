@@ -12,7 +12,7 @@ defineEmits<{
 
 <template>
   <button @click="$emit('click')" type="button" class="auto-layout horizontal left gap-8">
-    <span v-if="icon" class="material-symbols-outlined">
+    <span v-if="icon" class="material-symbols-outlined small" style="color: black">
       {{ icon }}
     </span>
     <span class="button-label">
@@ -28,6 +28,9 @@ defineEmits<{
   font-size: 13px;
   letter-spacing: 0.05em;
   color: #000;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 button {
